@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class FibonacciService {
 
+
     @Autowired
     private FibonacciDao fibonacciDao;
 
@@ -33,7 +34,7 @@ public class FibonacciService {
         List<Integer> fi = new ArrayList<>();
 
 
-        if (fibonacciDao.findById(fibonacci.getId()) != null) {
+        if (fibonacciDao.findById(fibonacci.getId()).getRequestNumber() == input && fibonacciDao.findById(fibonacci.getId()) != null) {
             return fibonacciDao.findById(fibonacci.getId()).getResultNumber();
         }
 
@@ -56,7 +57,6 @@ public class FibonacciService {
         }
 
         fibonacci.setResultNumber(sum);
-
         fibonacciDao.save(fibonacci);
 
 
@@ -64,6 +64,7 @@ public class FibonacciService {
     }
 
     public List<Fibonacci> findAll() {
+
         List<Fibonacci> all = fibonacciDao.findAll();
         return all;
     }
